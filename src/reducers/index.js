@@ -23,7 +23,7 @@ const events = (state = [], action) => {
     case 'DELETE_ALL_EVENTS':
       return []
     default:
-      return state1
+      return state
   }
 }
 
