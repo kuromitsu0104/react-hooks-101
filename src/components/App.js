@@ -1,6 +1,7 @@
 import React, { useState, useReducer } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+import Event from './Event'
 import reducer from '../reducers'
 
 const App = () => {
@@ -25,7 +26,7 @@ const App = () => {
       <form>
         <div>
           <div className="form-group">
-            <label htm lFor="formEventTitle">タイトル</label>
+            <label htmlFor="formEventTitle">タイトル</label>
             <input className="form-control" id="formEventTitle" value={title} onChange={e => setTitle(e.target.value)}/>
           </div>
           <div className="form-group">
@@ -47,6 +48,7 @@ const App = () => {
           </tr>
         </thead>
         <tbody>
+          { state.map((event, index) => (<Event key={index} event={event} dispatch={dispatch}/>))}
         </tbody>
       </table>
     </div>
