@@ -1,35 +1,44 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setName, setAge } from './actions/userActions';
+import { addTodo, deleteTodo } from './actions/todoActions';
 
 const App = (props) => {
-  const clickSetName = (test) => {
-    props.setName(test);
+  const clickAddTodo = () => {
+    props.addTodo("New Todo");
   }
-  const clickSetAge = (test) => {
-    props.setAge(test);
+    
+  const clickDeleteTodo = id => {
+    props.deleteTodo(id);
   }
+
   return (
     <div>
-      <button onClick={() => clickSetName('test')}>Set Name</button>
-      {props.name}
-      <br />
-      <button onClick={() => clickSetAge('test')}>Set Age</button>
-      {props.age}
+      <button onClick={clickAddTodo}>Set Name</button>
+      <ul>
+        {
+          props.todos.map((todo) => {
+            return (
+              <li key={todo.id}>{todo.id} {todo.text}
+                <button onClick={() => clickDeleteTodo(todo.id)}>DEL</button>
+              </li>
+            )
+          })
+        }
+      </ul>
     </div>
   )
 }
 
 const mapStateToProps = (state) => {
   return {
-    name: state.name,
-    age: state.age
+    todos: state
   }
 }
+
 const mapDispatchToProps = (dispatch) => {
   return {
-    setName: (name) => dispatch(setName(name)),
-    setAge: (age) => dispatch(setAge(age)) 
+    addTodo: (text) => dispatch(addTodo(text)),
+    deleteTodo: (id) => dispatch(deleteTodo(id))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App)
