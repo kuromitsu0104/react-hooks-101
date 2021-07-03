@@ -2,20 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { setName, setAge } from './actions/userActions';
 
-const App = () => {
-  const clickSetName = () => {
-    this.props.setName("Taro Yamada");
+const App = (props) => {
+  const clickSetName = (test) => {
+    props.setName(test);
   }
-  const clickSetAge = () => {
-    this.props.setAge(30);
+  const clickSetAge = (test) => {
+    props.setAge(test);
   }
   return (
     <div>
-      <button onClick={this.clickSetName.bind(this)}>Set Name</button>
-      {this.props.name}
+      <button onClick={() => clickSetName('test')}>Set Name</button>
+      {props.name}
       <br />
-      <button onClick={this.clickSetAge.bind(this)}>Set Age</button>
-      {this.props.age}
+      <button onClick={() => clickSetAge('test')}>Set Age</button>
+      {props.age}
     </div>
   )
 }
